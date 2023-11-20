@@ -20,8 +20,8 @@ void clearBuffer();
 void addStudent(student_t s[], int *ptr);
 void removeStudent(student_t s[], int *ptr);
 void updateGrade();
-void printGrade();
 void missingGrade();
+void printGrade(student_t s[], int *ptr);
 int greeting();
 
 int main()
@@ -64,6 +64,8 @@ int main()
         }
         else if(choice == 5)
         {
+            printGrade(students, ptrStudents);
+
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 6)
@@ -100,6 +102,12 @@ void addStudent(student_t s[], int *ptr)
         fgets(name, 30, stdin);
 
         strcpy(s[*ptr].name, name);
+
+        s[*ptr].homeworkAvg = 0.00;
+
+        s[*ptr].quizAvg = 0.00;
+
+        s[*ptr].examAvg = 0.00;
 
         *ptr = *ptr + 1;
 
@@ -153,14 +161,40 @@ void updateGrade()
 
 }
 
-void printGrade()
+void missingGrade()
 {
 
 }
 
-void missingGrade()
+void printGrade(student_t s[], int *ptr)
 {
+    printf("----------------------------------------------------------------------------\n");
 
+    for(int i = 0; i < *ptr; i++)
+    {
+        double weighted = (.5 * s[i].homeworkAvg);
+
+        weighted += (.2 * s[i].quizAvg);
+
+        weighted += (.3 * s[i].examAvg);
+
+        printf("Name: ");
+
+        fputs(s[i].name, stdout);
+
+        printf("\nHomework Average: %.2lf\n", s[i].homeworkAvg);
+
+        printf("\nQuiz Average: %.2lf\n", s[i].quizAvg);
+
+        printf("\nExam Average: %.2lf\n", s[i].examAvg);
+
+        printf("\nWeighted Average: %.2lf\n", weighted);
+
+        if(i != (*ptr - 1))
+        {
+            printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        }
+    }
 }
 
 int greeting()
@@ -170,9 +204,9 @@ int greeting()
     printf("Please choose an action...\n");
     printf("1 ~ Add a Student\n");
     printf("2 ~ Remove a Student\n");
-    printf("3 ~ Print all Grades\n");
-    printf("4 ~ Update Grades\n");
-    printf("5 ~ Find Missing Grades\n");
+    printf("3 ~ Update Grades\n");
+    printf("4 ~ Find Missing Grades\n");
+    printf("5 ~ Print All Grades\n");
     printf("6 ~ Exit\n");
 
     printf("----------------------------------------------------------------------------\n");
