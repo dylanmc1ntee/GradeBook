@@ -10,15 +10,14 @@
 typedef struct{
 
     char name [30];
-    int id;
     double homeworkAvg;
     double quizAvg;
     double examAvg;
-    double weightedAvg;
 
 }student_t;
 
-void addStudent();
+void clearBuffer();
+void addStudent(student_t s[], int *ptr);
 void removeStudent();
 void updateGrade();
 void printGrade();
@@ -29,6 +28,12 @@ int greeting();
 
 int main()
 {
+    student_t students[5];
+
+    int numStudents = 0;
+
+    int *ptrStudents = &numStudents;
+
     int choice = 0;
 
     printf("\nWelcome to the GradeBook!\n");
@@ -41,7 +46,7 @@ int main()
 
         if(choice == 1)
         {
-            addStudent();
+            addStudent(students, ptrStudents);
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 2)
@@ -74,7 +79,8 @@ int main()
         }
         else
         {
-            printf("Invalid Response!\n");
+            printf("\nInvalid Response!\n");
+            printf("----------------------------------------------------------------------------\n");
         }
     }
 
@@ -83,9 +89,31 @@ int main()
     return 0;
 }
 
-void addStudent()
+void clearBuffer()
 {
+    while(getchar() != '\n');
+}
 
+void addStudent(student_t s[], int *ptr)
+{
+    char name[30];
+
+    if(*ptr != 5)
+    {
+        printf("\nEnter the name of the student: ");
+
+        clearBuffer();
+
+        fgets(name, 30, stdin);
+
+        strcpy(s[*ptr].name, name);
+
+        *ptr = *ptr + 1;
+    }
+    else
+    {
+        printf("\nYour GradeBook is full!\n");
+    }
 }
 
 void removeStudent()
