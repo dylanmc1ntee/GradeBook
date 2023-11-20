@@ -18,7 +18,7 @@ typedef struct{
 
 void clearBuffer();
 void addStudent(student_t s[], int *ptr);
-void removeStudent();
+void removeStudent(student_t s[], int *ptr);
 void updateGrade();
 void printGrade();
 void missingGrade();
@@ -47,10 +47,13 @@ int main()
         if(choice == 1)
         {
             addStudent(students, ptrStudents);
+
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 2)
         {
+            removeStudent(students, ptrStudents);
+
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 3)
@@ -109,6 +112,8 @@ void addStudent(student_t s[], int *ptr)
         strcpy(s[*ptr].name, name);
 
         *ptr = *ptr + 1;
+
+        printf("\nStudent Added!\n");
     }
     else
     {
@@ -116,9 +121,41 @@ void addStudent(student_t s[], int *ptr)
     }
 }
 
-void removeStudent()
+void removeStudent(student_t s[], int *ptr)
 {
+    char name[30];
 
+    int found = 0;
+
+    printf("\nEnter the name of the student you want to remove: ");
+
+    clearBuffer();
+
+    fgets(name, 30, stdin);
+
+    for(int i = 0; i < 5; i++)
+    {
+        if(strcmp(s[i].name, name) == 0)
+        {
+            for(int j = i; j < 5; j++)
+            {
+                s[j] = s[j + 1];
+            }
+
+            found = 1;
+
+            *ptr = *ptr - 1;
+        }
+    }
+
+    if(found == 1)
+    {
+        printf("\nStudent Removed!\n");
+    }
+    else
+    {
+        printf("\nStudent not Found!\n");
+    }
 }
 
 void updateGrade()
