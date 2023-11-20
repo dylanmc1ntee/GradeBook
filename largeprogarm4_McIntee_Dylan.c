@@ -22,8 +22,6 @@ void removeStudent(student_t s[], int *ptr);
 void updateGrade();
 void printGrade();
 void missingGrade();
-void searchStudent();
-void displayAll();
 int greeting();
 
 int main()
@@ -40,7 +38,7 @@ int main()
 
     printf("----------------------------------------------------------------------------\n");
 
-    while(choice != 8)
+    while(choice != 6)
     {
         choice = greeting();
 
@@ -69,14 +67,6 @@ int main()
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 6)
-        {
-            printf("----------------------------------------------------------------------------\n");
-        }
-        else if(choice == 7)
-        {
-            printf("----------------------------------------------------------------------------\n");
-        }
-        else if(choice == 8)
         {
             printf("----------------------------------------------------------------------------\n");
         }
@@ -173,16 +163,6 @@ void missingGrade()
 
 }
 
-void searchStudent()
-{
-    
-}
-
-void displayAll()
-{
-
-}
-
 int greeting()
 {
     int choice;
@@ -193,9 +173,7 @@ int greeting()
     printf("3 ~ Print all Grades\n");
     printf("4 ~ Update Grades\n");
     printf("5 ~ Find Missing Grades\n");
-    printf("6 ~ Student Search\n");
-    printf("7 ~ View all Students\n");
-    printf("8 ~ Exit\n");
+    printf("6 ~ Exit\n");
 
     printf("----------------------------------------------------------------------------\n");
 
