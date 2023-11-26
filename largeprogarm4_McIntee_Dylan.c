@@ -19,7 +19,7 @@ typedef struct{
 void clearBuffer();
 void addStudent(student_t s[], int *ptr);
 void removeStudent(student_t s[], int *ptr);
-void updateGrade();
+void updateGrade(student_t s[]);
 void missingGrade();
 void printGrade(student_t s[], int *ptr);
 int greeting();
@@ -56,6 +56,7 @@ int main()
         }
         else if(choice == 3)
         {
+            updateGrade(students);
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 4)
@@ -156,9 +157,46 @@ void removeStudent(student_t s[], int *ptr)
     }
 }
 
-void updateGrade()
+void updateGrade(student_t s[])
 {
+    char name[30];
 
+    int found = 6;
+
+    printf("\nEnter the name of the student who's grade you want to update: ");
+
+    clearBuffer();
+
+    fgets(name, 30, stdin);
+
+    for(int i = 0; i < 5; i++)
+    {
+        if(strcmp(s[i].name, name) == 0)
+        {
+            found = i;
+        }
+    }
+
+    if(found == 6)
+    {
+        printf("\nStudent not found!\n");
+    }
+    else
+    {
+        printf("\nStudent found!\n");
+
+        printf("\nEnter updated homework grade: ");
+
+        scanf(" %lf", &s[found].homeworkAvg);
+
+        printf("Enter updated quiz grade: ");
+
+        scanf(" %lf", &s[found].quizAvg);
+
+        printf("Enter updated exam grade: ");
+
+        scanf(" %lf", &s[found].examAvg);
+    }
 }
 
 void missingGrade()
