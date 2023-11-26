@@ -23,6 +23,7 @@ void updateGrade(student_t s[]);
 void missingGrade(student_t s[], int *ptr);
 void printGrade(student_t s[], int *ptr);
 int greeting();
+void outputText(student_t s[], int *ptr);
 
 int main()
 {
@@ -82,6 +83,8 @@ int main()
             printf("----------------------------------------------------------------------------\n");
         }
     }
+
+    outputText(students, ptrStudents);
 
     printf("Goodbye...\n\n");
     
@@ -267,4 +270,34 @@ int greeting()
     scanf(" %d", &choice);
 
     return choice;
+}
+
+void outputText(student_t s[], int *ptr)
+{
+    FILE *outp = fopen("gradebook.txt", "w");
+
+    for(int i = 0; i < *ptr; i++)
+    {
+        double weighted = (.5 * s[i].homeworkAvg);
+
+        weighted += (.2 * s[i].quizAvg);
+
+        weighted += (.3 * s[i].examAvg);
+
+        fprintf(outp, "Name: ");
+
+        fputs(s[i].name, outp);
+
+        fprintf(outp, "\nHomework Average: %.2lf\n", s[i].homeworkAvg);
+
+        fprintf(outp, "\nQuiz Average: %.2lf\n", s[i].quizAvg);
+
+        fprintf(outp, "\nExam Average: %.2lf\n", s[i].examAvg);
+
+        fprintf(outp, "\nWeighted Average: %.2lf\n", weighted);
+
+        fprintf(outp, "----------------------------------------------------------------------------\n");
+    }
+
+    fclose(outp);
 }
