@@ -20,7 +20,7 @@ void clearBuffer();
 void addStudent(student_t s[], int *ptr);
 void removeStudent(student_t s[], int *ptr);
 void updateGrade(student_t s[]);
-void missingGrade();
+void missingGrade(student_t s[], int *ptr);
 void printGrade(student_t s[], int *ptr);
 int greeting();
 
@@ -57,10 +57,13 @@ int main()
         else if(choice == 3)
         {
             updateGrade(students);
+
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 4)
         {
+            missingGrade(students, ptrStudents);
+
             printf("----------------------------------------------------------------------------\n");
         }
         else if(choice == 5)
@@ -199,9 +202,19 @@ void updateGrade(student_t s[])
     }
 }
 
-void missingGrade()
+void missingGrade(student_t s[], int *ptr)
 {
+    printf("\nThe following students are missing grades: \n");
 
+    for(int i = 0; i < *ptr; i++)
+    {
+        if(s[i].homeworkAvg == 0.00 || s[i].quizAvg == 0.00 || s[i].examAvg == 0.00)
+        {
+            printf("\n");
+
+            fputs(s[i].name, stdout);
+        }
+    }
 }
 
 void printGrade(student_t s[], int *ptr)
